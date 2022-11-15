@@ -10,3 +10,7 @@ compile_c: $(target)
 factorial:
 	compile_nasm factorial
 	compile_c factorial
+
+clean:
+	rm -rf */*.out
+	rm -rf */*.o
