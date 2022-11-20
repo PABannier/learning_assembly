@@ -1,12 +1,24 @@
 ## Roadmap
 
-- [ ] Merge sort (recursion, stack frame, array manipulation)
+- [x] Hello world (syscalls read and write, registers, variables)
 
-- [ ] two sum (easy Leetcode) in assembly (good for array manipulation)
+- [x] Max of three (basic register manipulations)
 
-- [ ] Load file contents into buffer and write into stdout (syscalls and buffering)
+- [x] Fibonacci numbers (call to functions, recursion)
 
-- [ ] Do matrix multiplication in assembly (array views, strides, nested arrays...)
+- [x] Factorial (recursion, push pop on stack)
+
+- [x] Filled square on output console (buffers, bss)
+
+- [x] Sum of array (pointer arithmetic)
+
+- [ ] Do matrix multiplication in assembly (multi-dimensional arrays, SIMD parallelism)
+
+- [ ] Quick sort (recursion, stack frame, array manipulation)
+
+- [ ] Implement `ls` and `wc`
+
+- [ ] Write Pong
 
 ## TODO
 
