@@ -14,4 +14,3 @@ next:
         pop     rdi         ; restore n
         imul    rax, rdi    ; returned val of `_factorial` is in %rax, multiply the restored `n`
         ret
-
