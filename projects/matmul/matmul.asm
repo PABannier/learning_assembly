@@ -2,11 +2,11 @@
 ; Matrix mutiplication for double matrices, with the following prototype:
 ;       A is a n-by-m matrix, B is a m-by-k matrix, out is a n-by-k matrix
 ;
-;       void matmul(double[][] A, double[][] B, double[][] out, int64_t n, 
+;       void matmul(double[][] A, double[][] B, double[][] out, int64_t n,
 ;                   int64_t m, int64_t k);
 ; ----------------------------------------------------------------------------------
                 %include    "dot_prod.asm"
-                global      _matmul 
+                global      _matmul
 
                 section     .text
 
@@ -16,7 +16,7 @@ _matmul:
                 xor         r11, r11                ; j = 0, column index
                 mov         r12, rsi                ; store adress of B[0][0]
 
-main:
+compute:
                 push        rdi
                 push        rsi
                 push        rdx
@@ -24,21 +24,22 @@ main:
 
                 mov         rdx, r8
                 mov         rcx, r9
-                call        _dot_prod
+                call        _dot_prod               ; ret value in %xmm0
 
                 pop         rcx
                 pop         rdx
                 pop         rsi
                 pop         rdi
-                mov         [rdx], rax
+                movq        [rdx], xmm0
 
+bk3:
                 inc         r11                     ; increment column index
                 cmp         r11, r9                 ; am I at the last column of B?
                 jge         reset_index             ; if yes, go at the first column
 
                 add         rsi, 8                  ; else, move column pointer to right
                 add         rdx, 8                  ; and move column pointer of result
-                jmp         main                    ; and keep multiplying
+                jmp         compute                 ; and keep multiplying
 
 reset_index:
                 xor         r11, r11                ; reset column index
@@ -52,7 +53,7 @@ reset_index:
                 cmp         r10, rcx                ; am I at the last row of A?
                 jge         exit                    ; if yes, we're done
 
-                jmp         main                    ; else, keep multiplying
+                jmp         compute                 ; else, keep multiplying
 
 exit:
                 ret
